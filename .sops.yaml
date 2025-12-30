@@ -1,0 +1,7 @@
+keys:
+  - &phoenix age1twzxw8c8d7k9ph420wtpcsd0jak9l5vgt7mjll82tkunqzp22ysq98j9vc
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini|conf)$
+    key_groups:
+    - age:
+      - *phoenix
