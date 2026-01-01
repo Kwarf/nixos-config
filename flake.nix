@@ -18,6 +18,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
+
     snowfall-lib = {
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,6 +64,7 @@
       systems.modules.nixos = with inputs; [
         inputs.disko.nixosModules.disko
         sops-nix.nixosModules.sops
+        impermanence.nixosModules.impermanence
         home-manager.nixosModules.home-manager
       ];
     };
