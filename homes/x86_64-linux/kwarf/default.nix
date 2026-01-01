@@ -73,9 +73,15 @@
 
     git = {
       enable = true;
-      settings.user = {
-        email = "me@kwarf.com";
-        name = "Jimmy Bergström";
+      settings = {
+        user = {
+          email = "me@kwarf.com";
+          name = "Jimmy Bergström";
+        };
+
+        alias = {
+          st = "status";
+        };
       };
     };
 
