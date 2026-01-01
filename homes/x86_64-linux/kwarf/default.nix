@@ -3,6 +3,10 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./dotfiles
+  ];
+
   home.username = "kwarf";
   home.homeDirectory = "/home/kwarf";
 
