@@ -10,15 +10,10 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = "footclient"
 
-@hook.subscribe.startup_once
-def autostart():
-    commands = [
-        "foot --server"
-    ]
-    for cmd in commands:
-        subprocess.Popen(
-            cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-        )
+@hook.subscribe.startup_complete
+def started():
+    subprocess.run(["uwsm", "finalize"])
+
 
 keys = [
     # A list of available commands that can be bound to keys can be found
