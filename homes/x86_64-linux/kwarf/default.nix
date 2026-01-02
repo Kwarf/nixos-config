@@ -12,8 +12,9 @@
 
   home.packages = with pkgs; [
     age
-    pwvucontrol
     sops
+    wev # Wayland event viewer
+    wiremix # TUI mixer for PipeWire
   ];
 
   programs = {
@@ -85,9 +86,19 @@
       };
     };
 
+    gitui = {
+      enable = true;
+    };
+
     neovim = {
       enable = true;
       defaultEditor = true;
+    };
+  };
+
+  services = {
+    wob = {
+      enable = true;
     };
   };
 

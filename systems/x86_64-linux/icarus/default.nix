@@ -12,6 +12,7 @@
   fileSystems."/persisted".neededForBoot = true;
 
   networking.hostName = "icarus";
+  laptop.enable = true;
   wifi.interface = "wlp2s0";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -1,19 +1,51 @@
 import os
+import re
 import subprocess
 
 import libqtile.resources
 from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
+from libqtile.log_utils import logger
 
 mod = "mod4"
 terminal = "footclient"
 
 @hook.subscribe.startup_complete
-def started():
+def on_qtile_started():
     subprocess.run(["uwsm", "finalize"])
 
+@hook.subscribe.client_new
+def on_new_window(window):
+    if window.info()["wm_class"] == ["foot-transient"]:
+        screen = window.qtile.current_screen
+        window.enable_floating()
+        window.set_position(screen.width - window.width - 32, 32)
+        window.keep_above()
+        window.focus()
+
+# Wayland Overlay Bar
+def show_wob(percentage):
+    xdg_runtime_dir = os.environ.get('XDG_RUNTIME_DIR')
+    pipe_path = os.path.join(xdg_runtime_dir, 'wob.sock')
+    try:
+        with open(pipe_path, 'w') as pipe:
+            pipe.write(f"{percentage}\n")
+    except PermissionError:
+        raise PermissionError(f"No permission to write to {pipe_path}")
+    except OSError as e:
+        raise OSError(f"Failed to write to pipe: {e}")
+
+@lazy.function
+def change_brightness(qtile, delta):
+    result = subprocess.run(["brightnessctl", "-m", "s", f"{abs(delta)}%{'+' if delta > 0 else '-'}"], capture_output=True, text=True)
+    match = re.search(r"(\d+)%", result.stdout)
+    if match:
+        show_wob(int(match.group(1)))
+
+@lazy.function
+def spawn_transient_terminal(qtile, command):
+    qtile.spawn(" ".join([terminal, "--app-id=foot-transient", command]))
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -61,6 +93,11 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([], "XF86MonBrightnessDown", change_brightness(-5), desc="Decrease brightness by 5%"),
+    Key([], "XF86MonBrightnessUp", change_brightness(5), desc="Increase brightness by 5%"),
+    Key([], "XF86AudioLowerVolume", lazy.widget["pulsevolume"].decrease_vol(), desc="Decrease volume"),
+    Key([], "XF86AudioRaiseVolume", lazy.widget["pulsevolume"].increase_vol(), desc="Increase volume"),
+    Key([], "XF86AudioMute", lazy.widget["pulsevolume"].mute(), desc="Mute audio"),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -129,7 +166,7 @@ extension_defaults = widget_defaults.copy()
 logo = os.path.join(os.path.dirname(libqtile.resources.__file__), "logo.png")
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
                 widget.CurrentLayout(),
                 widget.GroupBox(),
@@ -143,9 +180,9 @@ screens = [
                 ),
                 widget.TextBox("default config", name="default"),
                 widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Systray(),
+                widget.StatusNotifier(),
+                widget.Battery(),
+                widget.PulseVolume(mouse_callbacks={"Button1": spawn_transient_terminal("wiremix")}),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 widget.QuickExit(),
             ],
@@ -172,7 +209,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
@@ -186,6 +223,9 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+    ],
+    no_reposition_rules=[
+        Match(wm_class="foot-transient"),
     ]
 )
 auto_fullscreen = True
