@@ -98,6 +98,7 @@ keys = [
     Key([], "XF86AudioLowerVolume", lazy.widget["pulsevolume"].decrease_vol(), desc="Decrease volume"),
     Key([], "XF86AudioRaiseVolume", lazy.widget["pulsevolume"].increase_vol(), desc="Increase volume"),
     Key([], "XF86AudioMute", lazy.widget["pulsevolume"].mute(), desc="Mute audio"),
+    Key(["mod4", "shift"], "s", lazy.spawn("grim -g \"$(slurp)\" - | wl-copy", shell=True), desc="Take screenshot"),
 ]
 
 # Add key bindings to switch VTs in Wayland.

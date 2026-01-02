@@ -12,9 +12,12 @@
 
   home.packages = with pkgs; [
     age
+    grim # Wayland screenshot tool
+    slurp # Wayland region selection (for screenshots)
     sops
     wev # Wayland event viewer
     wiremix # TUI mixer for PipeWire
+    wl-clipboard # wl-copy / wl-paste
   ];
 
   programs = {
