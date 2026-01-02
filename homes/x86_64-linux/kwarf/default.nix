@@ -93,6 +93,22 @@
       enable = true;
     };
 
+    iamb = {
+      enable = true;
+      settings = {
+        default_profile = "kwarf";
+        profiles.kwarf = {
+          user_id = "@kwarf:matrix.znurre.com";
+          url = "https://matrix.znurre.com";
+        };
+        settings = {
+          user_gutter_width = 16;
+          username_display = "localpart";
+          notifications.enabled = true;
+        };
+      };
+    };
+
     neovim = {
       enable = true;
       defaultEditor = true;
