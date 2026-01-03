@@ -70,6 +70,8 @@ keys = [
     # alt+tab is basically muscle memory by now, might as well map it to something
     Key([alt], "Tab", lazy.layout.next(), desc="Move window focus to next window"),
     Key([alt, "shift"], "Tab", lazy.layout.previous(), desc="Move window focus to previous window"),
+    # alt+space triggers the launcher, as I'm so used to it from both macOS and Plasma
+    Key([alt], "space", lazy.spawn("anyrun"), desc="Open application launcher"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     # Grow windows. If current window is on the edge of screen and direction

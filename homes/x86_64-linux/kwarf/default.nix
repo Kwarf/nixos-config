@@ -23,6 +23,17 @@
   catppuccin.foot.enable = true;
 
   programs = {
+    anyrun = {
+      enable = true;
+      config = {
+        y = { fraction = 0.3; };
+	hidePluginInfo = true;
+        plugins = [
+          "${pkgs.anyrun}/lib/libapplications.so"
+        ];
+      };
+    };
+
     firefox = {
       enable = true;
       policies = {
