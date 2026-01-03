@@ -4,9 +4,7 @@
   lib,
   pkgs,
   ...
-}: let
-  qtile = inputs.qtile.packages.${pkgs.stdenv.hostPlatform.system}.default;
-in {
+}: {
   config = {
     # Launch Qtile through UWSM to ensure proper session management
     programs.uwsm = {
@@ -15,7 +13,7 @@ in {
         qtile = {
           prettyName = "Qtile";
           comment = "Qtile managed by UWSM";
-          binPath = lib.getExe qtile;
+          binPath = lib.getExe config.services.xserver.windowManager.qtile.package;
           extraArgs = [
             "start"
             "-b"
@@ -28,7 +26,10 @@ in {
     services = {
       xserver.windowManager.qtile = {
         enable = true;
-        package = qtile;
+        extraPackages = python3Packages:
+          with python3Packages; [
+            qtile-extras
+          ];
       };
 
       # Use greetd as a display manager when running qtile

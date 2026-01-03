@@ -219,26 +219,6 @@
         "type": "github"
       }
     },
-    "qtile": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1767278320,
-        "narHash": "sha256-0qUTCopILGaUacQ1DA//1aBqn2uTDI2feEFAuaJjHRo=",
-        "owner": "qtile",
-        "repo": "qtile",
-        "rev": "7ba20105504a74e795523f79279e892d775c2166",
-        "type": "github"
-      },
-      "original": {
-        "owner": "qtile",
-        "repo": "qtile",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "alejandra": "alejandra",
@@ -247,7 +227,6 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixpkgs": "nixpkgs_2",
-        "qtile": "qtile",
         "snowfall-lib": "snowfall-lib",
         "sops-nix": "sops-nix"
       }
