@@ -20,6 +20,8 @@
     wl-clipboard # wl-copy / wl-paste
   ];
 
+  catppuccin.foot.enable = true;
+
   programs = {
     firefox = {
       enable = true;
@@ -73,6 +75,11 @@
     foot = {
       enable = true;
       server.enable = true;
+      settings = {
+        main = {
+          font = "MonaspiceAr NFM:size=12";
+        };
+      };
     };
 
     git = {

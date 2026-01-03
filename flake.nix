@@ -8,6 +8,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    catppuccin.url = "github:catppuccin/nix";
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,6 +62,10 @@
       channels-config = {
         allowUnfree = true;
       };
+
+      homes.modules = with inputs; [
+        catppuccin.homeModules.catppuccin
+      ];
 
       systems.modules.nixos = with inputs; [
         inputs.disko.nixosModules.disko
