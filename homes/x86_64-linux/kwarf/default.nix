@@ -28,6 +28,7 @@
   };
 
   catppuccin.foot.enable = true;
+  catppuccin.gitui.enable = true;
 
   programs = {
     anyrun = {
