@@ -4,11 +4,11 @@ import subprocess
 
 import libqtile.resources
 from libqtile import bar, hook, layout, qtile, widget
+from libqtile.backend.wayland import InputConfig
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 
-mod = "mod4"
 terminal = "footclient"
 
 @hook.subscribe.startup_complete
@@ -47,21 +47,31 @@ def change_brightness(qtile, delta):
 def spawn_transient_terminal(qtile, command):
     qtile.spawn(" ".join([terminal, "--app-id=foot-transient", command]))
 
+# Mapped to Caps Lock through keyd
+hyper = ["control", "mod4", "shift"]
+# Caps Lock + Alt
+hyper_a = ["control", "mod4", "shift", "mod1"]
+mod = "mod4"
+alt = "mod1"
+
 keys = [
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
-    # Switch between windows
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    # Use hyper+hjkl to move focus
+    Key(hyper, "h", lazy.layout.left(), desc="Move focus to left"),
+    Key(hyper, "l", lazy.layout.right(), desc="Move focus to right"),
+    Key(hyper, "j", lazy.layout.down(), desc="Move focus down"),
+    Key(hyper, "k", lazy.layout.up(), desc="Move focus up"),
+    # Use hyper+alt+hjkl to move windows
+    Key(hyper_a, "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key(hyper_a, "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key(hyper_a, "j", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key(hyper_a, "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    # hyper+alt+r will reload the config
+    Key(hyper_a, "r", lazy.reload_config(), desc="Reload the config"),
+    # alt+tab is basically muscle memory by now, might as well map it to something
+    Key([alt], "Tab", lazy.layout.next(), desc="Move window focus to next window"),
+    Key([alt, "shift"], "Tab", lazy.layout.previous(), desc="Move window focus to previous window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
@@ -82,7 +92,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([alt], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [mod],
         "f",
@@ -90,7 +100,6 @@ keys = [
         desc="Toggle fullscreen on the focused window",
     ),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([], "XF86MonBrightnessDown", change_brightness(-5), desc="Decrease brightness by 5%"),
@@ -120,29 +129,25 @@ groups = [Group(i) for i in "123456789"]
 for i in groups:
     keys.extend(
         [
-            # mod + group number = switch to group
+            # hyper+number to switch to that group
             Key(
-                [mod],
+                hyper,
                 i.name,
                 lazy.group[i.name].toscreen(),
                 desc=f"Switch to group {i.name}",
             ),
-            # mod + shift + group number = switch to & move focused window to group
+            # hyper+alt+number to switch and move focused window to that group
             Key(
-                [mod, "shift"],
+                hyper_a,
                 i.name,
                 lazy.window.togroup(i.name, switch_group=True),
                 desc=f"Switch to & move focused window to group {i.name}",
             ),
-            # Or, use below if you prefer not to switch to that group.
-            # # mod + shift + group number = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
         ]
     )
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4, margin=4),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
