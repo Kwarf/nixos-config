@@ -20,6 +20,13 @@
     wl-clipboard # wl-copy / wl-paste
   ];
 
+  home.pointerCursor = {
+    enable = true;
+    gtk.enable = true;
+    name = "catppuccin-latte-dark-cursors";
+    package = pkgs.catppuccin-cursors.latteDark;
+  };
+
   catppuccin.foot.enable = true;
 
   programs = {
