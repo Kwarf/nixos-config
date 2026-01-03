@@ -27,15 +27,19 @@
     package = pkgs.catppuccin-cursors.latteDark;
   };
 
-  catppuccin.foot.enable = true;
-  catppuccin.gitui.enable = true;
+  catppuccin = {
+    flavor = "macchiato";
+    fish.enable = true;
+    foot.enable = true;
+    gitui.enable = true;
+  };
 
   programs = {
     anyrun = {
       enable = true;
       config = {
-        y = { fraction = 0.3; };
-	hidePluginInfo = true;
+        y = {fraction = 0.3;};
+        hidePluginInfo = true;
         plugins = [
           "${pkgs.anyrun}/lib/libapplications.so"
         ];
