@@ -35,16 +35,18 @@
   };
 
   programs = {
-    anyrun = {
-      enable = true;
-      config = {
-        y = {fraction = 0.3;};
-        hidePluginInfo = true;
-        plugins = [
-          "${pkgs.anyrun}/lib/libapplications.so"
-        ];
-      };
-    };
+    #anyrun = {
+    #  enable = true;
+    #  config = {
+    #    y = {fraction = 0.3;};
+    #    hidePluginInfo = true;
+    #    plugins = [
+    #      "${pkgs.anyrun}/lib/libapplications.so"
+    #    ];
+    #  };
+    #};
+    #sherlock.enable = true;
+    rofi.enable = true;
 
     firefox = {
       enable = true;

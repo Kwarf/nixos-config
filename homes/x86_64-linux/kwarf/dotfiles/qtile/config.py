@@ -3,11 +3,14 @@ import re
 import subprocess
 
 import libqtile.resources
-from libqtile import bar, hook, layout, qtile, widget
+from libqtile import bar, hook, layout, qtile
 from libqtile.backend.wayland import InputConfig
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
+from qtile_extras import widget
+from qtile_extras.layout.decorations import RoundedCorners
+from qtile_extras.widget.decorations import BorderDecoration
 
 terminal = "footclient"
 
@@ -148,8 +151,12 @@ for i in groups:
         ]
     )
 
+#border_focus = GradientBorder(colours=["c6a0f6", "f5bde6", "b7bdf8"], points=[(0,1), (1,0)])
+border_focus = RoundedCorners(colour="c6a0f6")
+border_normal = RoundedCorners(colour="363a4f")
+
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4, margin=4),
+    layout.Columns(border_focus=border_focus, border_normal=border_normal, border_width=4, margin=4),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
@@ -165,8 +172,8 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
-    fontsize=12,
+    font="MonaspiceAr Nerd Font",
+    fontsize=14,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
@@ -195,6 +202,7 @@ screens = [
                 widget.QuickExit(),
             ],
             24,
+            margin=[0, 0, 2, 0],
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),

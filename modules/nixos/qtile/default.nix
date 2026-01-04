@@ -13,7 +13,7 @@
         qtile = {
           prettyName = "Qtile";
           comment = "Qtile managed by UWSM";
-          binPath = lib.getExe config.services.xserver.windowManager.qtile.package;
+          binPath = "/run/current-system/sw/bin/qtile";
           extraArgs = [
             "start"
             "-b"
