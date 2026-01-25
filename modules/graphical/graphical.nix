@@ -1,0 +1,6 @@
+{
+  flake.modules.nixos.graphical =
+    { ... }:
+    {
+    };
+}
