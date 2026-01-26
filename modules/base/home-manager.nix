@@ -24,4 +24,12 @@
         ];
       };
     };
+
+  flake.modules.nixos.graphical =
+    { self, inputs, ... }:
+    {
+      home-manager.users.kwarf.imports = [
+        self.modules.homeManager.graphical
+      ];
+    };
 }
