@@ -1,4 +1,12 @@
 {
+  flake.modules.nixos.base =
+    { pkgs, ... }:
+    {
+      console.keyMap = "sv-latin1";
+      i18n.defaultLocale = "en_US.UTF-8";
+      time.timeZone = "Europe/Stockholm";
+    };
+
   # Graphical environments include sv_SE.UTF-8 as well, for time and addresses and such
   flake.modules.nixos.graphical =
     { pkgs, ... }:
