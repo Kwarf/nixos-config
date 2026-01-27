@@ -32,4 +32,12 @@
         self.modules.homeManager.graphical
       ];
     };
+
+  flake.modules.nixos.laptop =
+    { self, inputs, ... }:
+    {
+      home-manager.users.kwarf.imports = [
+        self.modules.homeManager.laptop
+      ];
+    };
 }
