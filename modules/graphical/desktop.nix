@@ -6,4 +6,11 @@
 
       programs.niri.enable = true;
     };
+
+  flake.modules.homeManager.graphical = {
+    programs.waybar = {
+      enable = true;
+      systemd.enable = true;
+    };
+  };
 }
