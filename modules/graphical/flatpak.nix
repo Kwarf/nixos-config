@@ -15,6 +15,7 @@
 
   flake.modules.homeManager.graphical = {
     services.flatpak.packages = [
+      "com.valvesoftware.Steam"
       "im.riot.Riot"
     ];
   };
