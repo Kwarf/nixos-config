@@ -15,7 +15,7 @@
 
   flake.modules.homeManager.graphical = {
     services.flatpak.packages = [
-      "in.cinny.Cinny"
+      "im.riot.Riot"
     ];
   };
 }
