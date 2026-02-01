@@ -22,7 +22,5 @@
         force = true;
         source = config.lib.file.mkOutOfStoreSymlink "${graphical}/niri/config.kdl";
       };
-
-      programs.yazi.enable = true;
     };
 }
