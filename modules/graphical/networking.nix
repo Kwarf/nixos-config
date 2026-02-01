@@ -3,11 +3,27 @@
     { config, ... }:
     let
       secrets = config.my.secrets;
+      dnsUrl = "${config.networking.hostName}-${secrets.nextdns.id}.dns.nextdns.io";
     in
     {
-      networking.networkmanager = {
+      services.resolved = {
         enable = true;
-        ensureProfiles.profiles = secrets.wifiProfiles;
+        dnsovertls = true;
+      };
+
+      networking = {
+        nameservers = [
+          "45.90.28.0#${dnsUrl}"
+          "2a07:a8c0::#${dnsUrl}"
+          "45.90.30.0#${dnsUrl}"
+          "2a07:a8c1::#${dnsUrl}"
+        ];
+
+        networkmanager = {
+          enable = true;
+          dns = "systemd-resolved";
+          ensureProfiles.profiles = secrets.wifiProfiles;
+        };
       };
     };
 }
