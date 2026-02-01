@@ -7,14 +7,8 @@
       programs.niri.enable = true;
 
       environment.systemPackages = with pkgs; [
+        ironbar
         xwayland-satellite
       ];
     };
-
-  flake.modules.homeManager.graphical = {
-    programs.waybar = {
-      enable = true;
-      systemd.enable = true;
-    };
-  };
 }
