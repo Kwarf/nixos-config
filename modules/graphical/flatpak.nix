@@ -17,6 +17,7 @@
     services.flatpak.packages = [
       "com.valvesoftware.Steam"
       "im.riot.Riot"
+      "org.mozilla.firefox"
     ];
   };
 }
