@@ -24,6 +24,12 @@
           "laptop"
         ];
       };
+
+      nyx = {
+        tags = [
+          "desktop"
+        ];
+      };
     };
   };
 }
