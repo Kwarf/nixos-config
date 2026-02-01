@@ -185,6 +185,8 @@ binds {
     Alt+Space hotkey-overlay-title="Open the Launcher: vicinae" { spawn "vicinae" "toggle"; }
     Alt+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "footclient"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    // This may be a cursed bind, but what can I say, I'm used to it from _that_ OS
+    Mod+E { spawn "footclient" "yazi"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
