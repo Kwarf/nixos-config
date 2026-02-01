@@ -11,4 +11,16 @@
         xwayland-satellite
       ];
     };
+
+  flake.modules.homeManager.graphical =
+    { config, ... }:
+    let
+      graphical = "${config.home.homeDirectory}/nixos-config/modules/graphical";
+    in
+    {
+      xdg.configFile."niri/config.kdl" = {
+        force = true;
+        source = config.lib.file.mkOutOfStoreSymlink "${graphical}/niri/config.kdl";
+      };
+    };
 }
