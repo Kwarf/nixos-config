@@ -7,7 +7,6 @@
       programs.niri.enable = true;
 
       environment.systemPackages = with pkgs; [
-        ironbar
         xwayland-satellite
       ];
     };
@@ -21,6 +20,11 @@
       xdg.configFile."niri/config.kdl" = {
         force = true;
         source = config.lib.file.mkOutOfStoreSymlink "${graphical}/niri/config.kdl";
+      };
+
+      programs.waybar = {
+        enable = true;
+        systemd.enable = true;
       };
     };
 }
