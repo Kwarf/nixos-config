@@ -12,7 +12,7 @@
     };
 
   flake.modules.homeManager.graphical =
-    { config, ... }:
+    { config, pkgs, ... }:
     let
       graphical = "${config.home.homeDirectory}/nixos-config/modules/graphical";
     in
@@ -26,5 +26,9 @@
         enable = true;
         systemd.enable = true;
       };
+
+      home.packages = with pkgs; [
+        wbg
+      ];
     };
 }
