@@ -9,6 +9,8 @@
       environment.systemPackages = with pkgs; [
         xwayland-satellite
       ];
+
+      security.pam.services.swaylock = { };
     };
 
   flake.modules.homeManager.graphical =
@@ -17,6 +19,9 @@
       graphical = "${config.home.homeDirectory}/nixos-config/modules/graphical";
     in
     {
+      programs.swaylock.enable = true;
+      catppuccin.swaylock.enable = true;
+
       home.packages = with pkgs; [
         wbg
       ];
