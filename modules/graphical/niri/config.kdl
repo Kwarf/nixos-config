@@ -201,6 +201,7 @@ binds {
     Alt+Space { spawn "vicinae" "toggle"; }
     Alt+Return  { spawn "footclient"; }
     Super+L { spawn "swaylock"; }
+    Ctrl+Super+Alt+L { spawn-sh "swaylock --daemonize && systemctl sleep"; }
     // This may be a cursed bind, but what can I say, I'm used to it from _that_ OS
     Mod+E { spawn "footclient" "yazi"; }
 
