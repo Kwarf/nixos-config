@@ -244,6 +244,11 @@ binds {
     ISO_Level5_Shift+Shift+K     { move-window-up-or-to-workspace-up; }
     ISO_Level5_Shift+Shift+L     { move-column-right; }
 
+    ISO_Level5_Shift+WheelScrollDown       cooldown-ms=150 { focus-workspace-down; }
+    ISO_Level5_Shift+WheelScrollUp         cooldown-ms=150 { focus-workspace-up; }
+    ISO_Level5_Shift+Shift+WheelScrollDown cooldown-ms=150 { move-window-down-or-to-workspace-down; }
+    ISO_Level5_Shift+Shift+WheelScrollUp   cooldown-ms=150 { move-window-up-or-to-workspace-up; }
+
     ISO_Level5_Shift+Home { focus-column-first; }
     ISO_Level5_Shift+End  { focus-column-last; }
     ISO_Level5_Shift+Shift+Home { move-column-to-first; }
