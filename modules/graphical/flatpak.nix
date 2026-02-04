@@ -15,6 +15,7 @@
 
   flake.modules.homeManager.graphical = {
     services.flatpak.packages = [
+      "com.bitwig.BitwigStudio"
       "com.valvesoftware.Steam"
       "im.riot.Riot"
       "org.mozilla.firefox"
