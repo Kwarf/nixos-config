@@ -17,18 +17,13 @@
       graphical = "${config.home.homeDirectory}/nixos-config/modules/graphical";
     in
     {
+      home.packages = with pkgs; [
+        wbg
+      ];
+
       xdg.configFile."niri/config.kdl" = {
         force = true;
         source = config.lib.file.mkOutOfStoreSymlink "${graphical}/niri/config.kdl";
       };
-
-      programs.waybar = {
-        enable = true;
-        systemd.enable = true;
-      };
-
-      home.packages = with pkgs; [
-        wbg
-      ];
     };
 }

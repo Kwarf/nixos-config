@@ -175,6 +175,12 @@ window-rule {
 }
 
 window-rule {
+    match app-id="wiremix"
+    open-floating true
+    default-floating-position x=32 y=32 relative-to="top-right"
+}
+
+window-rule {
     match app-id="Summit"
     open-floating true
 }

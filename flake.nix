@@ -5,6 +5,10 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
+    catppuccin = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:catppuccin/nix";
+    };
     disko = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/disko";
