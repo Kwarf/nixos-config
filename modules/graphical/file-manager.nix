@@ -12,7 +12,21 @@
   flake.modules.homeManager.graphical =
     { pkgs, ... }:
     {
-      programs.yazi.enable = true;
+      home.packages = with pkgs; [
+        ripdrag
+      ];
+
+      programs.yazi = {
+        enable = true;
+        keymap = {
+          mgr.prepend_keymap = [
+            {
+              run = "shell -- ripdrag %s -x 2>/dev/null &";
+              on = [ "<C-n>" ];
+            }
+          ];
+        };
+      };
 
       xdg.configFile."xdg-desktop-portal-termfilechooser/config".text = ''
         [filechooser]
