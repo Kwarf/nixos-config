@@ -16,7 +16,16 @@
       ];
     };
 
-  flake.modules.homeManager.graphical = {
-    catppuccin.flavor = "frappe";
-  };
+  flake.modules.homeManager.graphical =
+    { pkgs, ... }:
+    {
+      catppuccin.flavor = "frappe";
+
+      home.pointerCursor = {
+        enable = true;
+        gtk.enable = true;
+        name = "BreezeX-RosePine-Linux";
+        package = pkgs.rose-pine-cursor;
+      };
+    };
 }
