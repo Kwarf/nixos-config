@@ -26,4 +26,8 @@
         };
       };
     };
+
+  flake.modules.nixos.desktop = {
+    networking.networkmanager.wifi.powersave = false;
+  };
 }
