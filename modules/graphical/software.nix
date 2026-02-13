@@ -3,9 +3,12 @@
   flake.modules.nixos.graphical = {
     nixpkgs = {
       config = {
+        allowUnfree = true;
         rocmSupport = true; # For HW acceleration in Blender
       };
     };
+
+    programs.steam.enable = true;
   };
 
   flake.modules.homeManager.graphical =
