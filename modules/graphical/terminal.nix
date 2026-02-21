@@ -17,5 +17,6 @@
         };
       };
     };
+    catppuccin.foot.enable = true;
   };
 }

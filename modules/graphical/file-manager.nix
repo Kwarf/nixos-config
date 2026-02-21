@@ -18,6 +18,9 @@
 
       programs.yazi = {
         enable = true;
+        initLua = ''
+          require("full-border"):setup()
+        '';
         keymap = {
           mgr.prepend_keymap = [
             {
@@ -26,7 +29,11 @@
             }
           ];
         };
+        plugins = {
+          full-border = pkgs.yaziPlugins.full-border;
+        };
       };
+      catppuccin.yazi.enable = true;
 
       xdg.configFile."xdg-desktop-portal-termfilechooser/config".text = ''
         [filechooser]
