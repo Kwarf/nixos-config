@@ -16,7 +16,7 @@
   networking.hostName = "nyx";
 
   services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{class}=="0x0c0330", ATTR{power/wakeup}="disabled"
   '';
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
