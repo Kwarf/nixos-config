@@ -83,11 +83,11 @@ layout {
         // off
 
         width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
+        active-color "#ca9ee6"
+        inactive-color "#737994"
 
         // Color of the border around windows that request your attention.
-        urgent-color "#9b0000"
+        urgent-color "#e78284"
 
         // Gradients can use a few different interpolation color spaces.
         // For example, this is a pastel rainbow gradient via in="oklch longer hue".
