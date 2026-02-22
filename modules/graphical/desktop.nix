@@ -44,6 +44,12 @@
         wbg
       ];
 
+      dconf.settings = {
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+        };
+      };
+
       xdg.configFile."niri/config.kdl" = {
         force = true;
         source = config.lib.file.mkOutOfStoreSymlink "${graphical}/niri/config.kdl";
