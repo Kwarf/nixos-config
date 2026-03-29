@@ -1,20 +1,40 @@
 # nixos-config
 
-This was an attempt/experiment at running NixOS as a way to have a unified system install and configuration between my
-desktop and laptop. It lasted for about 6 weeks.
+This is my personal NixOS configuration, with the main goal of having  a unified system install and configuration
+between my desktop and laptop.
 
 ## Features
 
+- Dentritic aspect-oriented structure thanks to [den](https://github.com/vic/den)
+  - Automatic recursive imports with [import-tree](https://github.com/vic/import-tree)
+  - Auto-generated flake.nix using [flake-file](https://github.com/vic/flake-file)
+  - Modularized with [flake-parts](https://github.com/hercules-ci/flake-parts)
 - Declarative disk partitioning using [disko](https://github.com/nix-community/disko)
-- tmpfs root file system with the help of [impermanence](https://github.com/nix-community/impermanence)
-- Simple host management based around tags with [easy-hosts](https://github.com/tgirlcloud/easy-hosts)
-- Auto-generated flake.nix using [flake-file](https://github.com/vic/flake-file)
-- Modularized with [flake-parts](https://github.com/hercules-ci/flake-parts)
-- Automatic recursive imports with [import-tree](https://github.com/vic/import-tree)
+- tmpfs root file system through [impermanence](https://github.com/nix-community/impermanence)
+- Declarative [Flatpak](https://flatpak.org/) management with [nix-flatpak](https://github.com/gmodena/nix-flatpak)
 
-## Conclusion
+## Inspired by
 
-It's been a fun learning experience, but I feel like I spent too much time tinkering and configuring things, as can be
-seen by the list above being quite long, considering that I'm new to Nix too. This is not a comment on Nix or NixOS
-forcing complicated setups in any way, but rather an issue that I have, where I can't help myself from going all out and
-setting everything up chasing some sort of idea of a _"perfect"_ system. I will go back to Arch Linux.
+- https://codeberg.org/Adda/nixos-config
+- https://github.com/augustocdias/dotfiles
+- https://github.com/henriquekirchheck/nixos-flake
+
+## Installation instructions
+
+These are just personal notes because I tend to forget these things.
+
+### Remote install
+
+Using [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) to push the configuration for installation over
+SSH.
+
+1. Boot a [NixOS ISO](https://nixos.org/download/#nixos-iso) (other systems are supported too, but untested by me).
+2. Create a new file under `modules/hosts/` for the new host, taking "inspiration" from one of those already there.
+3. Run `nixos-generate-config --no-filesystems --show-hardware-config` on the new machine, and add those options to the
+host configuration.
+4. Create an appropriate `disko.devices` definition, see [examples](https://github.com/nix-community/disko/tree/master/example).
+5. Run the installation:
+```sh
+nix run github:nix-community/nixos-anywhere -- --flake .#<hostname> --target-host nixos@<ip address>
+```
+6. Profit. Wait for it to finish and reboot.
