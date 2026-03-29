@@ -46,6 +46,13 @@ in
               default_area = "navbar";
               private_browsing = true;
             };
+            # SponsorBlock
+            "sponsorBlocker@ajay.app" = {
+              install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
+              installation_mode = "force_installed";
+              default_area = "menupanel";
+              private_browsing = true;
+            };
           };
           FirefoxHome = {
             Search = true;
