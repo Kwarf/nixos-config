@@ -13,6 +13,10 @@
           gnome-tour
           gnome-user-docs
         ];
+
+        environment.systemPackages = with pkgs; [
+          gnome-tweaks
+        ];
       };
 
     homeManager = {
@@ -24,6 +28,13 @@
             "firefox.desktop"
             "org.gnome.Console.desktop"
           ];
+        };
+        "org/gnome/desktop/interface" = {
+          font-antialiasing = "rgba";
+        };
+        "org/gnome/desktop/wm/preferences" = {
+          mouse-button-modifier = "<Alt>";
+          resize-with-right-button = true;
         };
         "org/gnome/settings-daemon/plugins/housekeeping" = {
           donation-reminder-enabled = false;
