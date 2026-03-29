@@ -25,6 +25,9 @@
             "org.gnome.Console.desktop"
           ];
         };
+        "org/gnome/settings-daemon/plugins/housekeeping" = {
+          donation-reminder-enabled = false;
+        };
         "org/gnome/desktop/peripherals/touchpad" = {
           natural-scroll = false;
         };
