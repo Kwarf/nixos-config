@@ -38,3 +38,6 @@ host configuration.
 nix run github:nix-community/nixos-anywhere -- --flake .#<hostname> --target-host nixos@<ip address>
 ```
 6. Profit. Wait for it to finish and reboot.
+
+It's possible to pass either `remote` or `local` as a `--build-on` option to `nixos-anywhere`, which could be nice
+depending on which machine is faster or has a better connection.
