@@ -53,6 +53,13 @@ in
               default_area = "menupanel";
               private_browsing = true;
             };
+            # Consent-O-Matic
+            "gdpr@cavi.au.dk" = {
+              install_url = "https://addons.mozilla.org/firefox/downloads/latest/consent-o-matic/latest.xpi";
+              installation_mode = "force_installed";
+              default_area = "menupanel";
+              private_browsing = true;
+            };
           };
           FirefoxHome = {
             Search = true;
