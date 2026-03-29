@@ -40,6 +40,7 @@
           };
           "org/gnome/desktop/interface" = {
             font-antialiasing = "rgba";
+            show-battery-percentage = true;
           };
           "org/gnome/desktop/wm/preferences" = {
             mouse-button-modifier = "<Alt>";
