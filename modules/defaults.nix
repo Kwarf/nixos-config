@@ -3,6 +3,8 @@
   den.default.nixos.system.stateVersion = "25.11";
   den.default.homeManager.home.stateVersion = "25.11";
 
+  den.default.nixos.home-manager.useGlobalPkgs = true;
+
   den.default.includes = [
     den._.hostname
     den.aspects.system._.nix
