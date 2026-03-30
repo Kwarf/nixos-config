@@ -6,6 +6,7 @@
     includes = [
       den.aspects.system._.bootloader._.systemd-boot
       den.aspects.system._.kernel._.latest
+      den.aspects.system._.scheduler._.system76
       den.aspects.system._.zswap
 
       (den.aspects.system._.impermanence._.addPersistance "/persistent")
