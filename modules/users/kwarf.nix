@@ -12,6 +12,7 @@ in
     user = {
       hashedPassword = secrets.hashedUserPassword;
       openssh.authorizedKeys.keys = [
+        "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIhXZJK+lqHnjSheYCSuGtWbfMqvWgJUsPOyFRPburpZyZiIb8FZEYoxl0ag1kvGhbW18Bk+hFS1UChG43Triqw= MacBook-Air@secretive.Jimmy’s-MacBook-Air.local"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgyUhHbmhbQtQ62dYG35WjSdxErYNTnG9dbexV46l4P kwarf@icarus"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE1uNk/boWIBtPpsBs/shTkriyEpWwXjorwwb63Cea2M kwarf@nyx"
       ];
