@@ -24,6 +24,7 @@
       })
 
       den.aspects.system._.networking._.wifi
+      den.aspects.system._.networking._.wifi._.allNetworks
 
       den.aspects.services._.nts
       den.aspects.services._.nts._.servers._.stockholm

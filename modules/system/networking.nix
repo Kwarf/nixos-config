@@ -62,8 +62,11 @@ in
         ];
 
         nixos.networking.networkmanager.ensureProfiles.profiles = builtins.listToAttrs (
-          map mkWifiProfile config.my.secrets.wifiNetworks
+          map mkWifiProfile [ config.my.secrets.wifiHomeNetwork ]
         );
+
+        provides.allNetworks.nixos.networking.networkmanager.ensureProfiles.profiles =
+          builtins.listToAttrs (map mkWifiProfile config.my.secrets.wifiNetworks);
       };
     };
   };
