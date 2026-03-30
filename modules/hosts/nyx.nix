@@ -5,7 +5,7 @@
   den.aspects.nyx = {
     includes = [
       den.aspects.system._.bootloader._.systemd-boot
-      den.aspects.system._.kernel._."6_18" # FIXME: Change this to `latest` whenever 6.19 is fixed to boot on this machine
+      den.aspects.system._.kernel._.latest
       den.aspects.system._.scheduler._.system76
 
       (den.aspects.system._.impermanence._.addPersistance "/persistent")

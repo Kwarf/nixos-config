@@ -8,13 +8,6 @@
             boot.kernelPackages = pkgs.linuxPackages_latest;
           };
       };
-      "6_18" = {
-        nixos =
-          { pkgs, ... }:
-          {
-            boot.kernelPackages = pkgs.linuxPackages_6_18;
-          };
-      };
     };
   };
 }
