@@ -20,6 +20,7 @@ in
     homeManager = {
       programs.git = {
         enable = true;
+        lfs.enable = true;
         settings = {
           user = {
             email = "me@kwarf.com";
@@ -27,6 +28,32 @@ in
           };
           alias = {
             st = "status";
+          };
+          init = {
+            defaultBranch = "main";
+          };
+          fetch = {
+            all = true;
+            prune = true;
+            pruneTags = true;
+          };
+          pull = {
+            rebase = true;
+          };
+          push = {
+            autoSetupRemote = true;
+            followTags = true;
+          };
+          rebase = {
+            autoSquash = true;
+            autoStash = true;
+            updateRefs = true;
+          };
+          diff = {
+            algorithm = "histogram";
+            colorMoved = "plain";
+            mnemonicPrefix = true;
+            renames = true;
           };
         };
       };
