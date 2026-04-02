@@ -11,7 +11,11 @@
 
     homeManager = {
       imports = [ inputs.nix-flatpak.homeManagerModules.nix-flatpak ];
-      services.flatpak.update.onActivation = true;
+      services.flatpak = {
+        uninstallUnmanaged = true;
+        uninstallUnused = true;
+        update.onActivation = true;
+      };
     };
 
     provides = {
