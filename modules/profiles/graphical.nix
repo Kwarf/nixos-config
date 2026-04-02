@@ -6,6 +6,7 @@
       den.aspects.software._.firefox
       den.aspects.software._.fractal
       den.aspects.software._.gnome
+      den.aspects.software._.obs
       den.aspects.software._.steam
       den.aspects.software._.zed
       den.aspects.system._.locale._.swedishFormats
