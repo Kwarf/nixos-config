@@ -93,6 +93,27 @@ in
                 URLTemplate = "https://kagi.com/search?token=${kagiToken}&q={searchTerms}";
                 SuggestURLTemplate = "https://kagisuggest.com/api/autosuggest?q={searchTerms}";
               }
+              {
+                Name = "NixOS Packages";
+                Alias = "@np";
+                Method = "GET";
+                IconURL = "https://search.nixos.org/favicon.png";
+                URLTemplate = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";
+              }
+              {
+                Name = "NixOS Options";
+                Alias = "@no";
+                Method = "GET";
+                IconURL = "https://search.nixos.org/favicon.png";
+                URLTemplate = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
+              }
+              {
+                Name = "Home Manager";
+                Alias = "@hm";
+                Method = "GET";
+                IconURL = "https://home-manager-options.extranix.com/images/favicon.png";
+                URLTemplate = "https://home-manager-options.extranix.com/?query={searchTerms}&release=master";
+              }
             ];
             Remove = [
               "Google"
