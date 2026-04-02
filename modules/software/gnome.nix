@@ -47,6 +47,7 @@
             switch-applications-backward = [ ];
             switch-windows = [ "<Alt>Tab" ];
             switch-windows-backward = [ "<Shift><Alt>Tab" ];
+            toggle-fullscreen = [ "<Super>f" ];
           };
           "org/gnome/desktop/wm/preferences" = {
             mouse-button-modifier = "<Alt>";
