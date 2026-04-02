@@ -32,10 +32,14 @@
       den.aspects.services._.ssh._.server
 
       den.aspects.profiles._.graphical
+      den.aspects.profiles._.graphical._.laptop
     ];
 
     # This includes aspects with homeManager for all users
-    provides.to-users.includes = [ den.aspects.profiles._.graphical ];
+    provides.to-users.includes = [
+      den.aspects.profiles._.graphical
+      den.aspects.profiles._.graphical._.laptop
+    ];
 
     nixos =
       {

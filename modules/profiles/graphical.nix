@@ -10,5 +10,14 @@
       den.aspects.system._.locale._.swedishFormats
       den.aspects.system._.networking._.networkmanager._.nextdns
     ];
+
+    provides = {
+      desktop.includes = [
+        (den.aspects.software._.gnome._.suspendTimeoutSeconds 3600)
+      ];
+      laptop.includes = [
+        (den.aspects.software._.gnome._.suspendTimeoutSeconds 900)
+      ];
+    };
   };
 }

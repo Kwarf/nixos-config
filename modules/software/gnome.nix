@@ -63,5 +63,15 @@
           };
         };
       };
+
+    provides = {
+      suspendTimeoutSeconds = seconds: {
+        homeManager.dconf.settings = {
+          "org/gnome/settings-daemon/plugins/power" = {
+            sleep-inactive-ac-timeout = seconds;
+          };
+        };
+      };
+    };
   };
 }
