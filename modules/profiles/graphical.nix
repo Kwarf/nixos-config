@@ -4,6 +4,7 @@
     includes = [
       den.aspects.software._.bitwig
       den.aspects.software._.blender
+      den.aspects.software._.development
       den.aspects.software._.firefox
       den.aspects.software._.fonts
       den.aspects.software._.fractal
