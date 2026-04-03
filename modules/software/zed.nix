@@ -37,6 +37,23 @@
               diagnostics = false;
               metrics = false;
             };
+            languages = {
+              "Nix" = {
+                formatter = {
+                  external = {
+                    command = "nixfmt";
+                    arguments = [
+                      "--quiet"
+                      "--"
+                    ];
+                  };
+                };
+                language_servers = [
+                  "nixd"
+                  "!nil"
+                ];
+              };
+            };
           };
         };
       };
