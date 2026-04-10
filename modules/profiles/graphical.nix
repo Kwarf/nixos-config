@@ -2,6 +2,7 @@
 {
   den.aspects.profiles.provides.graphical = {
     includes = [
+      den.aspects.software._.bitwig
       den.aspects.software._.blender
       den.aspects.software._.firefox
       den.aspects.software._.fonts
