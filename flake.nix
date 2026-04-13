@@ -29,5 +29,6 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-lib.follows = "nixpkgs";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
   };
 }
