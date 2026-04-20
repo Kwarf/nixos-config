@@ -30,6 +30,7 @@
       den.aspects.services._.nts._.servers._.stockholm
       den.aspects.services._.nts._.servers._.sundsvall
       den.aspects.services._.ssh._.server
+      den.aspects.services._.tailscale
 
       den.aspects.profiles._.graphical
       den.aspects.profiles._.graphical._.laptop
