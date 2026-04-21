@@ -4,6 +4,7 @@
 
   den.aspects.icarus = {
     includes = [
+      den.aspects.system._.bluetooth
       den.aspects.system._.bootloader._.systemd-boot
       den.aspects.system._.kernel._.latest
       den.aspects.system._.scheduler._.system76
