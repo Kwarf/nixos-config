@@ -29,6 +29,14 @@ in
 {
   den.aspects.system.provides.networking = {
     provides = {
+      captive-browser = interface: {
+        nixos = {
+          programs.captive-browser = {
+            enable = true;
+            interface = interface;
+          };
+        };
+      };
       networkmanager = {
         nixos = {
           networking.networkmanager.enable = true;

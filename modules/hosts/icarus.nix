@@ -25,6 +25,7 @@
         ];
       })
 
+      (den.aspects.system._.networking._.captive-browser "wlp2s0")
       den.aspects.system._.networking._.wifi
       den.aspects.system._.networking._.wifi._.allNetworks
 
