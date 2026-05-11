@@ -13,7 +13,4 @@
 
   # enable hm by default
   den.schema.user.classes = lib.mkDefault [ "homeManager" ];
-
-  # host<->user provides
-  den.ctx.user.includes = [ den._.mutual-provider ];
 }
