@@ -7,10 +7,10 @@
       den.aspects.software._.development
       den.aspects.software._.firefox
       den.aspects.software._.fonts
-      den.aspects.software._.fractal
-      den.aspects.software._.gnome
+      den.aspects.software._.neochat
       den.aspects.software._.obs
       den.aspects.software._.obsidian
+      den.aspects.software._.plasma
       den.aspects.software._.steam
       den.aspects.software._.zed
       den.aspects.system._.locale._.swedishFormats
@@ -19,10 +19,10 @@
 
     provides = {
       desktop.includes = [
-        (den.aspects.software._.gnome._.suspendTimeoutSeconds 3600)
+        (den.aspects.software._.plasma._.suspendTimeoutSeconds 3600)
       ];
       laptop.includes = [
-        (den.aspects.software._.gnome._.suspendTimeoutSeconds 900)
+        (den.aspects.software._.plasma._.suspendTimeoutSeconds 900)
       ];
     };
   };

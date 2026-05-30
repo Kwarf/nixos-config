@@ -12,7 +12,7 @@
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -28,6 +28,12 @@
     import-tree.url = "github:vic/import-tree";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-lib.follows = "nixpkgs";
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 }
