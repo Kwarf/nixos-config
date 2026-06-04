@@ -1,3 +1,12 @@
+> [!NOTE]
+> I'm archiving this _again_, as I'm distro hopping to [Fedora Silverblue](https://fedoraproject.org/atomic-desktops/silverblue/) instead.
+> I feel like that should fit me pretty well, as I like the idea of immutability in the base system then using separate
+> containers for each project I'm working on to keep things neat and separate. I'm also one of those weird people who
+> appreciate the sandboxing of Flatpak apps. I obviously already had essentially that same setup through this config,
+> but I think I want something more hands-off.
+
+---
+
 # nixos-config
 
 This is my personal NixOS configuration, with the main goal of having  a unified system install and configuration
