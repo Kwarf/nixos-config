@@ -1,0 +1,9 @@
+keys:
+  - &kwarf age16ww8u5mkrwqmvvup8n4k0afex9gfarwq8wa6pn5ctyzsd3rjppysuhf392
+  - &nyx age17tp0dx034cd93y5fs47knxmzwjqvnplgzkr93ylzp594gwznn45q4qfjpe
+creation_rules:
+  - path_regex: secrets/secrets\.yaml$
+    key_groups:
+      - age:
+          - *kwarf
+          - *nyx

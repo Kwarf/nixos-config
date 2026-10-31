@@ -1,32 +1,43 @@
-> [!NOTE]
-> I'm archiving this _again_, as I'm distro hopping to [Fedora Silverblue](https://fedoraproject.org/atomic-desktops/silverblue/) instead.
-> I feel like that should fit me pretty well, as I like the idea of immutability in the base system then using separate
-> containers for each project I'm working on to keep things neat and separate. I'm also one of those weird people who
-> appreciate the sandboxing of Flatpak apps. I obviously already had essentially that same setup through this config,
-> but I think I want something more hands-off.
-
----
-
 # nixos-config
 
-This is my personal NixOS configuration, with the main goal of having  a unified system install and configuration
-between my desktop and laptop.
+This is my personal NixOS configuration for two AMD machines, `nyx` (desktop) and `icarus` (laptop), with the main goal
+of having a unified system install and configuration between them. Most edits are made by Claude, then reviewed
+by me before they're applied.
+
+## Goals
+
+I want a system that stays out of my way, so the most important rule is: **boring and explicit beats clever and
+abstract.**
+
+- **Hands-off:** I touch the config only when I want something new.
+- **Rolling:** tracks `nixos-unstable`, and I run updates myself. No CI or auto-upgrades.
+- **In sync:** both machines share the same base, with small per-host differences.
+- **Readable:** easy to read in one sitting, by me or anyone else, without knowing any framework.
+
+Abstractions meant to scale to many hosts or users, and generating `flake.nix` or other files from code, are explicit
+non-goals.
+
+## Structure
+
+```
+flake.nix              # plain flake, one small mkHost helper
+hosts/<name>/          # default.nix (imports + host-specific settings), hardware.nix, disko.nix
+modules/               # one file per concern: base, desktop, development, gaming, ...
+secrets/secrets.yaml   # sops-encrypted, recipients in .sops.yaml
+```
+
+There are no frameworks, and no custom `enable` options. A host's `imports` list is the full answer to "what's on this
+machine", importing the module is enough to activate it.
 
 ## Features
 
-- Dentritic aspect-oriented structure thanks to [den](https://github.com/vic/den)
-  - Automatic recursive imports with [import-tree](https://github.com/vic/import-tree)
-  - Auto-generated flake.nix using [flake-file](https://github.com/vic/flake-file)
-  - Modularized with [flake-parts](https://github.com/hercules-ci/flake-parts)
 - Declarative disk partitioning using [disko](https://github.com/nix-community/disko)
-- tmpfs root file system through [impermanence](https://github.com/nix-community/impermanence)
-- Declarative [Flatpak](https://flatpak.org/) management with [nix-flatpak](https://github.com/gmodena/nix-flatpak)
-
-## Inspired by
-
-- https://codeberg.org/Adda/nixos-config
-- https://github.com/augustocdias/dotfiles
-- https://github.com/henriquekirchheck/nixos-flake
+- Ephemeral root file system with [preservation](https://github.com/nix-community/preservation), keeping a short,
+  explicit list of persisted state
+- Secrets managed by [sops-nix](https://github.com/Mic92/sops-nix), decrypted with each host's SSH host key
+- Apps from nixpkgs by default, with [nix-flatpak](https://github.com/gmodena/nix-flatpak) for a few proprietary,
+  internet-facing apps where the sandbox is worth it
+- Per-project dev environments using flakes and [nix-direnv](https://github.com/nix-community/nix-direnv)
 
 ## Installation instructions
 
@@ -38,15 +49,23 @@ Using [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) to push 
 SSH.
 
 1. Boot a [NixOS ISO](https://nixos.org/download/#nixos-iso) (other systems are supported too, but untested by me).
-2. Create a new file under `modules/hosts/` for the new host, taking "inspiration" from one of those already there.
-3. Run `nixos-generate-config --no-filesystems --show-hardware-config` on the new machine, and add those options to the
-host configuration.
-4. Create an appropriate `disko.devices` definition, see [examples](https://github.com/nix-community/disko/tree/master/example).
-5. Run the installation:
+2. Create a new directory under `hosts/` for the new host, taking "inspiration" from one of those already there, and add
+it to `flake.nix` with `mkHost`.
+3. Run `nixos-generate-config --no-filesystems --show-hardware-config` on the new machine, and save the output as the
+host's `hardware.nix`.
+4. Create an appropriate `disko.devices` definition in the host's `disko.nix`, see [examples](https://github.com/nix-community/disko/tree/master/example).
+5. Generate the host key up front, since secrets have to decrypt on first boot. Add its age key to `.sops.yaml`, then
+re-encrypt with `sops updatekeys secrets/secrets.yaml`:
 ```sh
-nix run github:nix-community/nixos-anywhere -- --flake .#<hostname> --target-host nixos@<ip address>
+mkdir -p extra/persistent/etc/ssh
+ssh-keygen -t ed25519 -N "" -f extra/persistent/etc/ssh/ssh_host_ed25519_key
+ssh-to-age < extra/persistent/etc/ssh/ssh_host_ed25519_key.pub
 ```
-6. Profit. Wait for it to finish and reboot.
+6. Run the installation, then delete `extra`:
+```sh
+nix run github:nix-community/nixos-anywhere -- --extra-files extra --flake .#<hostname> --target-host nixos@<ip address>
+```
+7. Profit. Wait for it to finish and reboot.
 
 It's possible to pass either `remote` or `local` as a `--build-on` option to `nixos-anywhere`, which could be nice
 depending on which machine is faster or has a better connection.
