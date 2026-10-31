@@ -19,14 +19,18 @@
   environment.gnome.excludePackages = with pkgs; [
     epiphany
     gnome-contacts
+    gnome-system-monitor
     gnome-tour
     gnome-user-docs
+    showtime
   ];
 
   environment.systemPackages = with pkgs; [
+    cine
     fractal
     gnome-tweaks
     gnomeExtensions.tiling-shell
+    resources
   ];
 
   # These are defaults, values set by the user take priority.
