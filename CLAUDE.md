@@ -29,7 +29,7 @@ and explicit beats clever and abstract. This file adds the rules and decisions i
 
 ## Working in this repo
 
-- Flakes only see tracked files, so new files need `git add`. Add them by name: the sandbox leaves placeholder dotfiles in the repo root. Don't commit unless I ask.
+- Flakes only see tracked files, so new files need `git add`. Add them by name: the sandbox leaves placeholder dotfiles in the repo root. Don't commit unless I ask, and commit directly to `master` unless I ask for a branch.
 - Adding a persisted path needs `nh os boot` and a reboot, not `switch`: the mount may not be active yet, so data could land on the tmpfs root.
 - In the sandbox, `nix` can't reach the daemon and network access varies. Check changes with `nix eval --store <scratch dir>`, using `--override-input` with local store paths when inputs can't be fetched. That doesn't replace a real rebuild and reboot.
 - When debugging, first check which generation is running with `/run/current-system`. It may not be the latest build.
