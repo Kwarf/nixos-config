@@ -4,6 +4,7 @@
     ./disko.nix
     ./hardware.nix
     ../../modules/base.nix
+    ../../modules/claude.nix
     ../../modules/creative.nix
     ../../modules/desktop.nix
     ../../modules/development.nix

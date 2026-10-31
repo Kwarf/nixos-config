@@ -24,12 +24,12 @@ and explicit beats clever and abstract. This file adds the rules and decisions i
 - **ROCm is scoped per package** (e.g. `pkgsRocm.blender`). Don't set `nixpkgs.config.rocmSupport` globally.
 - **Kernel:** `linuxPackages_latest`.
 - **Dev environments:** the system only enables direnv and nix-direnv.
-- **Claude Code:** enable its built-in sandbox, which needs `bubblewrap` and `socat` installed.
+- **Claude Code:** `claude` is a bubblewrap wrapper in `modules/claude.nix`, with explicit binds, so hooks and MCP and LSP servers are jailed too. Don't use its built-in sandbox, the jail replaces it. The network stays open on purpose, and the Wayland socket is shared for the clipboard. Never share X11 or D-Bus. A project's tools come from its devShell, so the wrapper stays the same across projects.
 - Keep `system.stateVersion` at `26.05` (the installed version).
 
 ## Working in this repo
 
-- Flakes only see tracked files, so new files need `git add`. Add them by name: the sandbox leaves placeholder dotfiles in the repo root. Don't commit unless I ask, and commit directly to `master` unless I ask for a branch.
+- Flakes only see tracked files, so new files need `git add`. Don't commit unless I ask, and commit directly to `master` unless I ask for a branch.
 - Adding a persisted path needs `nh os boot` and a reboot, not `switch`: the mount may not be active yet, so data could land on the tmpfs root.
-- In the sandbox, `nix` can't reach the daemon and network access varies. Check changes with `nix eval --store <scratch dir>`, using `--override-input` with local store paths when inputs can't be fetched. That doesn't replace a real rebuild and reboot.
+- Inside the jail, `nix` can't reach the daemon. Check changes with `nix eval --store <scratch dir>`, using `--override-input` with local store paths when inputs can't be fetched. That doesn't replace a real rebuild and reboot.
 - When debugging, first check which generation is running with `/run/current-system`. It may not be the latest build.
