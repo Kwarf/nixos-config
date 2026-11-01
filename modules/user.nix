@@ -11,6 +11,7 @@
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIhXZJK+lqHnjSheYCSuGtWbfMqvWgJUsPOyFRPburpZyZiIb8FZEYoxl0ag1kvGhbW18Bk+hFS1UChG43Triqw= MacBook-Air@secretive.Jimmy’s-MacBook-Air.local"
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGJZP2v8ZhVYc0gAU07ABKcf+0p16uQ1SGUCklunI5RRUkqvzkjaOb9vFtDNooFlvHgoKI/TYW00PO3E2P2vQQU= kwarf@nyx"
     ];
     hashedPasswordFile = config.sops.secrets.kwarf-password.path;
   };
