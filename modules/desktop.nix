@@ -78,5 +78,21 @@
     }
   ];
 
+  # Uses GNOME Shell's own prompt and supports SSH_ASKPASS_PROMPT, unlike the Seahorse default.
+  # nixpkgs' openssh-askpass only builds the GTK 3 variant, so this switches it to the GCR one.
+  programs.ssh.askPassword =
+    let
+      askpass = pkgs.openssh-askpass.overrideAttrs {
+        buildInputs = [ pkgs.gcr_4 ];
+        makeFlags = "gnome-ssh-askpass4";
+        installPhase = ''
+          runHook preInstall
+          install -Dm755 gnome-ssh-askpass4 $out/libexec/gnome-ssh-askpass4
+          runHook postInstall
+        '';
+      };
+    in
+    "${askpass}/libexec/gnome-ssh-askpass4";
+
   programs.firefox.enable = true;
 }
