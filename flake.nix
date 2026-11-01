@@ -29,5 +29,6 @@
     in
     {
       nixosConfigurations.nyx = mkHost "nyx";
+      nixosConfigurations.icarus = mkHost "icarus";
     };
 }
