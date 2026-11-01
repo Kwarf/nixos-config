@@ -34,6 +34,7 @@
     gnome-tweaks
     gnomeExtensions.tiling-shell
     resources
+    tonearm
   ];
 
   # These are defaults, values set by the user take priority.
