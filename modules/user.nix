@@ -7,6 +7,7 @@
   users.mutableUsers = false;
   users.users.kwarf = {
     isNormalUser = true;
+    description = "Jimmy Bergström";
     shell = pkgs.fish;
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [

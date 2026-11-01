@@ -16,6 +16,9 @@
   services.desktopManager.gnome.enable = true;
   services.gnome.gnome-initial-setup.enable = false;
 
+  # Holds the avatar picked in Settings, which GDM and the lock screen show
+  preservation.preserveAt."/persistent".directories = [ "/var/lib/AccountsService" ];
+
   environment.gnome.excludePackages = with pkgs; [
     epiphany
     gnome-contacts
