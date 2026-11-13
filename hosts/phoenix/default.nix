@@ -46,6 +46,13 @@
     "nvidia_drm"
   ];
 
+  # Firefox's VA-API startup test fails on NVIDIA even though nvidia-vaapi-driver works
+  programs.firefox.preferences = {
+    "media.hardware-video-decoding.force-enabled" = true;
+    # Turing has no AV1 decoder, so sites would fall back to software decoding
+    "media.av1.enabled" = false;
+  };
+
   programs.dconf.profiles.user.databases = [
     {
       settings."org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-timeout =
