@@ -1,6 +1,12 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [ inputs.sops-nix.nixosModules.sops ];
+
+  # For editing secrets/secrets.yaml, see the README
+  environment.systemPackages = [
+    pkgs.sops
+    pkgs.ssh-to-age
+  ];
 
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;

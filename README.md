@@ -62,9 +62,8 @@ Get the disk's ID with `ssh nixos@<ip address> ls -l /dev/disk/by-id`.
 5. Generate the host key up front, since secrets have to decrypt on first boot. It can decrypt all of them, so keep it
 in `/tmp`, away from the repo and outside Claude's jail. Run this and the next step on the machine you're installing
 from, not the new one, and outside the jail. Add the age key to `.sops.yaml`, then re-encrypt with
-`sops updatekeys secrets/secrets.yaml`:
+`sops updatekeys secrets/secrets.yaml` (see [Editing secrets](#editing-secrets) if that fails to decrypt):
 ```sh
-nix shell nixpkgs#sops nixpkgs#ssh-to-age
 mkdir -p /tmp/extra/persistent/etc/ssh
 ssh-keygen -t ed25519 -N "" -f /tmp/extra/persistent/etc/ssh/ssh_host_ed25519_key
 ssh-to-age < /tmp/extra/persistent/etc/ssh/ssh_host_ed25519_key.pub
@@ -78,3 +77,17 @@ nix run github:nix-community/nixos-anywhere -- --extra-files /tmp/extra --flake 
 
 It's possible to pass either `remote` or `local` as a `--build-on` option to `nixos-anywhere`, which could be nice
 depending on which machine is faster or has a better connection.
+
+### Editing secrets
+
+`sops` and `ssh-to-age` are installed on every host. Run `sops edit secrets/secrets.yaml` outside the jail, which works
+as is with my personal age key in `~/.config/sops/age/keys.txt`.
+
+Without it, use the host key, which is also a recipient. Pointing sops at it with `SOPS_AGE_SSH_PRIVATE_KEY_FILE` doesn't
+work, as sops then only matches `ssh-ed25519` recipients and `.sops.yaml` lists the converted `age1…` ones. Convert it
+the same way sops-nix does instead (fish syntax, the full path is needed as sudo may not keep the PATH):
+```fish
+set -x SOPS_AGE_KEY_CMD "sudo $(command -v ssh-to-age) -private-key -i /persistent/etc/ssh/ssh_host_ed25519_key"
+sops edit secrets/secrets.yaml
+set -e SOPS_AGE_KEY_CMD
+```
