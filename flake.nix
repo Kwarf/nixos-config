@@ -30,5 +30,6 @@
     {
       nixosConfigurations.nyx = mkHost "nyx";
       nixosConfigurations.icarus = mkHost "icarus";
+      nixosConfigurations.phoenix = mkHost "phoenix";
     };
 }

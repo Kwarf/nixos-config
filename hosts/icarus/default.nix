@@ -23,6 +23,9 @@
 
   networking.hostName = "icarus";
 
+  # Load the GPU driver early, so the splash doesn't flicker or change resolution
+  hardware.amdgpu.initrd.enable = true;
+
   # Login pages are unreachable with the DNS over TLS from nextdns.nix, this uses the network's DNS
   programs.captive-browser = {
     enable = true;

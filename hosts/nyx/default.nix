@@ -23,6 +23,9 @@
 
   networking.hostName = "nyx";
 
+  # Load the GPU driver early, so the splash doesn't flicker or change resolution
+  hardware.amdgpu.initrd.enable = true;
+
   programs.dconf.profiles.user.databases = [
     {
       settings."org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-timeout =

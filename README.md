@@ -1,7 +1,8 @@
 # nixos-config
 
-This is my personal NixOS configuration for two AMD machines, `nyx` (desktop) and `icarus` (laptop), with the main goal
-of having a unified system install and configuration between them. Most edits are made by Claude, then reviewed
+This is my personal NixOS configuration for my machines, `nyx` (desktop) and `icarus` (laptop), plus `phoenix`, an older
+desktop with an NVIDIA GPU that stands in while nyx is being repaired. The main goal is having a unified system install
+and configuration between them. Most edits are made by Claude, then reviewed
 by me before they're applied.
 
 ## Goals
@@ -11,7 +12,7 @@ abstract.**
 
 - **Hands-off:** I touch the config only when I want something new.
 - **Rolling:** tracks `nixos-unstable`, and I run updates myself. No CI or auto-upgrades.
-- **In sync:** both machines share the same base, with small per-host differences.
+- **In sync:** all machines share the same base, with small per-host differences.
 - **Readable:** easy to read in one sitting, by me or anyone else, without knowing any framework.
 
 Abstractions meant to scale to many hosts or users, and generating `flake.nix` or other files from code, are explicit
@@ -61,7 +62,8 @@ ssh nixos@<ip address> nixos-generate-config --no-filesystems --show-hardware-co
 Get the disk's ID with `ssh nixos@<ip address> ls -l /dev/disk/by-id`.
 5. Generate the host key up front, since secrets have to decrypt on first boot. It can decrypt all of them, so keep it
 in `/tmp`, away from the repo and outside Claude's jail. Run this and the next step on the machine you're installing
-from, not the new one, and outside the jail. Add the age key to `.sops.yaml`, then re-encrypt with
+from, not the new one, and outside the jail. Add the age key to `.sops.yaml`, both under `keys` and in the
+`creation_rules` group, then re-encrypt with
 `sops updatekeys secrets/secrets.yaml` (see [Editing secrets](#editing-secrets) if that fails to decrypt):
 ```sh
 mkdir -p /tmp/extra/persistent/etc/ssh

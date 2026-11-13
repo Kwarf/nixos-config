@@ -9,9 +9,6 @@
     "udev.log_level=3"
   ];
 
-  # Load the GPU driver early, so the splash doesn't flicker or change resolution
-  hardware.amdgpu.initrd.enable = true;
-
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
   services.gnome.gnome-initial-setup.enable = false;
