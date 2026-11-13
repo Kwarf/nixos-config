@@ -47,5 +47,8 @@ in
     lfs.enable = true;
   };
 
-  environment.systemPackages = [ pkgs.neovim ];
+  environment.systemPackages = [
+    pkgs.dotter
+    pkgs.neovim
+  ];
 }
