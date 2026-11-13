@@ -14,6 +14,7 @@
     ../../modules/nextdns.nix
     ../../modules/nts.nix
     ../../modules/preservation.nix
+    ../../modules/scripts.nix
     ../../modules/secrets.nix
     ../../modules/ssh.nix
     ../../modules/tailscale.nix

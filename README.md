@@ -24,6 +24,7 @@ non-goals.
 flake.nix              # plain flake, one small mkHost helper
 hosts/<name>/          # default.nix (imports + host-specific settings), hardware.nix, disko.nix
 modules/               # one file per concern: base, desktop, development, gaming, ...
+modules/scripts/       # personal scripts as plain files, packaged in modules/scripts.nix
 secrets/secrets.yaml   # sops-encrypted, recipients in .sops.yaml
 ```
 
