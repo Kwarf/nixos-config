@@ -1,7 +1,7 @@
 # nixos-config
 
 This is my personal NixOS configuration for my machines, `nyx` (desktop) and `icarus` (laptop), plus `phoenix`, an older
-desktop with an NVIDIA GPU that stands in while nyx is being repaired. The main goal is having a unified system install
+desktop with an NVIDIA GPU. The main goal is having a unified system install
 and configuration between them. Most edits are made by Claude, then reviewed
 by me before they're applied.
 

@@ -1,7 +1,7 @@
 keys:
   - &kwarf age16ww8u5mkrwqmvvup8n4k0afex9gfarwq8wa6pn5ctyzsd3rjppysuhf392
   - &icarus age1unjed7p6tfec5e40aaej774njzv606danr8wdjv5wmgevcv493jskzdhhd
-  - &nyx age17tp0dx034cd93y5fs47knxmzwjqvnplgzkr93ylzp594gwznn45q4qfjpe
+  - &nyx age1lwpdtuvvx607vnlpcks3av80m5r2mjay6h5wmnk7yv3kf0xmre7sfu6zfj
   - &phoenix age1nar8akhcktrj4j55670aeuj3gajqq4fslu2dj74895gu9ntswd9q7ute88
 creation_rules:
   - path_regex: secrets/secrets\.yaml$
